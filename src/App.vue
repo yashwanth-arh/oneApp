@@ -1,26 +1,41 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <v-app>
+    <v-app-bar>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Title</v-toolbar-title>
+      <v-spacer></v-spacer>
+
+      <v-btn variant="plain" class="d-none d-md-block">
+        <router-link to="/">Home</router-link>
+      </v-btn>
+
+      <v-btn variant="plain" class="d-none d-md-block" d-sm-none>
+        <router-link to="/about">About</router-link>
+      </v-btn>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-btn variant="plain" class="d-block d-md-none">
+        <router-link to="/">Home</router-link>
+      </v-btn>
+
+      <v-btn variant="plain" class="d-block d-md-none" d-sm-none>
+        <router-link to="/about">About</router-link>
+      </v-btn>
+    </v-navigation-drawer>
+
+    <v-main>
+      <router-view></router-view>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+  name: "App",
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  data: () => ({
+    drawer: null,
+  }),
+};
+</script>
